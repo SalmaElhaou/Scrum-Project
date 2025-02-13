@@ -72,8 +72,5 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/personnes/{id}', [PersonneController::class, 'destroy'])->name('personnes.destroy');
 });
 
-
-    return view('welcome');
-
 Route::resource('projects', ProjectController::class);
 
