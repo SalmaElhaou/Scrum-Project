@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompteController;
 use App\Http\Controllers\PersonneController;
 
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,7 @@ use App\Http\Controllers\PersonneController;
 */
 
 Route::get('/', function () {
+
     return view('index');
 });
 
@@ -27,7 +30,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
 Route::middleware(['auth'])->group(function () {
-    
+
 
     // Redirections vers les différents tableaux de bord en fonction du rôle
     Route::get('/admin/dashboard', function () {
@@ -68,4 +71,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/personnes/{id}', [PersonneController::class, 'update'])->name('personnes.update');
     Route::delete('/personnes/{id}', [PersonneController::class, 'destroy'])->name('personnes.destroy');
 });
+
+
+    return view('welcome');
+
+Route::resource('projects', ProjectController::class);
 

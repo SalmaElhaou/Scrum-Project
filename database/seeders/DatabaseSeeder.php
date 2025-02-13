@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 use App\Models\Personne;
 use App\Models\Compte;
 use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'telephone' => '0600000000',
         ]);
-    
+
         Compte::create([
             'personne_id' => $admin->id,
             'login' => 'adminuser@gmail.com',
