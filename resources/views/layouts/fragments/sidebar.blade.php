@@ -9,10 +9,10 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Comptes</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#create-account" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="create-account" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('admin.personnes') }}">
                         <i class="bi bi-circle"></i><span>Create Account</span>
@@ -23,6 +23,19 @@
                         <i class="bi bi-circle"></i><span>Accounts List</span>
                     </a>
                 </li>
+            </ul>
+        </li><!-- End Components Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#accountList" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Login History</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="accountList" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('login.history') }}">
+                        <i class="bi bi-circle"></i><span>list of authenticated accounts</span>
+                    </a>
+                </li>
+               
             </ul>
         </li><!-- End Components Nav -->
     </ul>

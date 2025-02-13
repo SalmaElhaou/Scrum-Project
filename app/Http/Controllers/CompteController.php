@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CompteController extends Controller
 {
-    // 🔹 Afficher la liste des comptes
     public function index()
     {
-        $comptes = Compte::with('personne')->get();
+        $comptes = Compte::with('personne')
+            ->where('role', '!=', 'ADMIN_USER') // Exclure ADMIN_USER
+            ->get();
+    
         return view('admin.comptes.index', compact('comptes'));
     }
 

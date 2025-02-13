@@ -25,23 +25,26 @@ class PersonneController extends Controller
     // 🔹 Enregistrer une nouvelle personne
     public function store(Request $request)
     {
-        
-        
-        $validatedData = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'cin' => 'required|string|max:20|unique:personnes',
-            'email' => 'required|email|unique:personnes',
-            'telephone' => 'required|string|max:20',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nom' => 'required|string|max:255',
+                'prenom' => 'required|string|max:255',
+                'cin' => 'required|string|max:20|unique:personnes',
+                'email' => 'required|email|unique:personnes',
+                'telephone' => 'required|string|max:20',
+            ]);
     
-        // Vérifier si les données validées sont correctes
-        
+            // Création de la personne
+            $personne = Personne::create($validatedData);
     
-        $personne= Personne::create($validatedData);
-        
-        return redirect()->route('admin.personnes')->with('success', 'Personne ajoutée avec succès.');
+            return redirect()->route('admin.personnes')->with('success', 'Personne ajoutée avec succès.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'ajout de la personne.')->withInput();
+        }
     }
+    
     
 
     // 🔹 Afficher les détails d'une personne

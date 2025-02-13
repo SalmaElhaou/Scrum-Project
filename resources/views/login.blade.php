@@ -63,7 +63,7 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
-                    <a href="#">forgot password ?</a>
+                    <a href="/forgot/Password/Auth">forgot password ?</a>
                 </div>
             </div>
         </div>
@@ -89,6 +89,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+@if(session('message'))
+<script>
+    Swal.fire({
+        title: 'Alerte',
+        text: '{{ session('message') }}',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
 </body>
 </html>

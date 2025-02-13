@@ -212,6 +212,18 @@
           });
       });
       </script>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+       @if(session('message'))
+       <script>
+           Swal.fire({
+               title: 'Alerte',
+               text: '{{ session('message') }}',
+               icon: 'warning',
+               confirmButtonText: 'OK'
+           });
+       </script>
+     @endif
       
      
       

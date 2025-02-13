@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historique_connexions', function (Blueprint $table) {
+        Schema::create('login_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('compte_id')->constrained()->onDelete('cascade');
-            $table->string('ip_address');
-            $table->timestamp('date_connexion')->useCurrent();
-            $table->timestamps();
+            $table->foreignId('compte_id')->constrained('comptes')->onDelete('cascade');
+            $table->string('ip_address', 45); // Supporte IPv4 et IPv6
+            $table->timestamp('login_time')->useCurrent();
+            
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historique_connexions');
+        Schema::dropIfExists('login_histories');
     }
 };

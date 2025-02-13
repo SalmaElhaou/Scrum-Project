@@ -17,5 +17,9 @@ class Compte extends Authenticatable
     {
         return $this->belongsTo(Personne::class);
     }
+    public function loginHistories()
+    {
+        return $this->hasMany(LoginHistory::class, 'compte_id');
+    }
 }
 

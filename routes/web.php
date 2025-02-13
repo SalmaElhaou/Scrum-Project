@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompteController;
 use App\Http\Controllers\PersonneController;
-
+use App\Http\Controllers\LoginHistoryController;
+use App\Http\Controllers\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +24,17 @@ Route::get('/', function () {
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/loginForm', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+#Controller ForgotPasswordController
+Route::get('/forgot/Password/Auth', function () {
+    return view('admin.ResetPassWord.forgotPassWord');
+})->name('forgot');
+Route::post('/envoyer-code-verification', [ForgotPasswordController::class, 'sendVerificationCode'])->name('forgoot');
+Route::get('/saisir-code', [ForgotPasswordController::class, 'showVerificationForm']);
+Route::post('/verifier-code', [ForgotPasswordController::class, 'verifyCode']);
+Route::get('/modifier-mot-de-passe', [ForgotPasswordController::class, 'showResetForm']);
+Route::post('/reset/password', [ForgotPasswordController::class, 'resetPassword'])->name('reset');
 
 Route::middleware(['auth'])->group(function () {
     
@@ -58,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/comptes/{id}/toggle-lock', [CompteController::class, 'toggleLock'])->name('comptes.toggleLock');
     Route::delete('/comptes/{id}', [CompteController::class, 'destroy'])->name('comptes.destroy');
 });
-
+Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login.history');
 Route::middleware(['auth'])->group(function () {
     Route::get('/personnes', [PersonneController::class, 'index'])->name('personnes.index');
     Route::get('/personnes/create', [PersonneController::class, 'create'])->name('personnes.create');

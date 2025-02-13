@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Compte;
+use App\Models\LoginHistory;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -38,6 +39,8 @@ class AuthController extends Controller
         }
     
         Auth::login($compte);
+        // 🔹 Enregistrer l'historique de connexion
+    LoginHistory::logLogin($compte->id, $request->ip());
        //  dd(Auth::check(), Auth::user());
        //$request->session()->regenerate();
 
@@ -52,9 +55,9 @@ class AuthController extends Controller
         default => redirect()->route('login')->withErrors(['login' => 'Rôle non reconnu']),
     };
     
-        // Si nécessaire, tu peux aussi retourner une réponse JSON pour les API
-        return response()->json(['message' => 'Connexion réussie', 'user' => Auth::user()]);
+      
     }
+
     
 
     // LOGOUT
